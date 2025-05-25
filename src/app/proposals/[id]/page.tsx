@@ -1,6 +1,7 @@
 "use client";
 
-import { SetStateAction, useState } from "react";
+import { SetStateAction, useState, use } from "react";
+import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -10,13 +11,21 @@ import { Progress } from "@/components/ui/progress";
 import { Clock, Users, ArrowLeft, Check, X } from "lucide-react";
 import Link from "next/link";
 
-export default function ProposalDetail({ params }: { params: { id: string } }) {
+type PageProps = {
+  params: Promise<{
+    id: string;
+  }>;
+};
+
+export default function ProposalDetail({ params }: PageProps) {
+  // Use React.use() to unwrap the Promise in a client component
+  const { id } = use(params);
+
   const [comment, setComment] = useState("");
   const [userVote, setUserVote] = useState<"yes" | "no" | null>(null);
 
-  // Mock data - replace with API call
   const proposal = {
-    id: params.id,
+    id: id,
     title: "Increase Developer Fund Allocation",
     status: "active",
     timeLeft: "2 days",
@@ -73,7 +82,7 @@ export default function ProposalDetail({ params }: { params: { id: string } }) {
   const handleVote = async (vote: "yes" | "no") => {
     setUserVote(vote);
     // API integration point for voting
-    console.log(`Voting ${vote} on proposal ${params.id}`);
+    console.log(`Voting ${vote} on proposal ${id}`);
     // TODO: Integrate with blockchain/API
   };
 
