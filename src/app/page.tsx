@@ -41,11 +41,7 @@ export default function Dashboard() {
       timeLeft: "2 days",
       yesVotes: 65,
       noVotes: 35,
-      voters: [
-        { id: 1, avatar: "/placeholder.svg?height=32&width=32&query=voter1" },
-        { id: 2, avatar: "/placeholder.svg?height=32&width=32&query=voter2" },
-        { id: 3, avatar: "/placeholder.svg?height=32&width=32&query=voter3" },
-      ],
+      voters: [{ id: 1, avatar: "/user-profile.svg" }],
     },
     {
       id: 2,
@@ -53,10 +49,6 @@ export default function Dashboard() {
       timeLeft: "5 days",
       yesVotes: 82,
       noVotes: 18,
-      voters: [
-        { id: 1, avatar: "/placeholder.svg?height=32&width=32&query=voter4" },
-        { id: 2, avatar: "/placeholder.svg?height=32&width=32&query=voter5" },
-      ],
     },
   ];
 
@@ -96,12 +88,12 @@ export default function Dashboard() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         {stats.map((stat, index) => (
           <Card key={index}>
-            <CardHeader className="pb-2">
+            <CardHeader className="pb-1">
               <CardTitle className="text-sm font-medium text-gray-600">
                 {stat.title}
               </CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="-mt-6">
               <div className="text-3xl font-bold text-gray-900 mb-1">
                 {stat.value}
               </div>
@@ -157,16 +149,17 @@ export default function Dashboard() {
                 </div>
 
                 <div className="mb-4">
-                  <div className="flex justify-between text-sm text-gray-600 mb-2">
+                  <Progress value={proposal.yesVotes} className="h-2 mb-2" />
+
+                  <div className="flex justify-between text-sm text-gray-600">
                     <span>{proposal.yesVotes}% Yes</span>
                     <span>{proposal.noVotes}% No</span>
                   </div>
-                  <Progress value={proposal.yesVotes} className="h-2" />
                 </div>
 
                 <div className="flex justify-between items-center">
                   <div className="flex -space-x-2">
-                    {proposal.voters.map((voter) => (
+                    {proposal.voters?.map((voter) => (
                       <Avatar
                         key={voter.id}
                         className="h-8 w-8 border-2 border-white"
@@ -180,7 +173,7 @@ export default function Dashboard() {
                     <Button
                       variant="outline"
                       size="sm"
-                      className="text-indigo-600"
+                      className="text-indigo-600 cursor-pointer"
                     >
                       View Details
                     </Button>
@@ -199,7 +192,7 @@ export default function Dashboard() {
           <CardHeader>
             <CardTitle>Recent Votes</CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="-mt-3">
             <div className="space-y-4">
               {recentVotes.map((vote, index) => (
                 <div key={index} className="flex items-center justify-between">
@@ -235,7 +228,7 @@ export default function Dashboard() {
           <CardHeader>
             <CardTitle>Announcements</CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="-mt-3">
             <div className="space-y-4">
               {announcements.map((announcement, index) => (
                 <div key={index} className="border-l-4 border-indigo-500 pl-4">
@@ -244,9 +237,6 @@ export default function Dashboard() {
                   </div>
                   <div className="text-sm text-gray-600 mt-1">
                     {announcement.description}
-                  </div>
-                  <div className="text-xs text-gray-500 mt-1">
-                    {announcement.time}
                   </div>
                 </div>
               ))}

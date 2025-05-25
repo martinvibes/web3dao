@@ -38,11 +38,13 @@ export default function ProposalDetail({ params }: { params: { id: string } }) {
     noAmount: 242000,
     topVoters: [
       {
+        id: 1,
         name: "alice.eth",
         amount: "50,000 MGS",
         avatar: "/placeholder.svg?height=32&width=32&query=alice",
       },
       {
+        id: 2,
         name: "bob.eth",
         amount: "35,000 MGS",
         avatar: "/placeholder.svg?height=32&width=32&query=bob",
@@ -163,12 +165,12 @@ export default function ProposalDetail({ params }: { params: { id: string } }) {
                     onChange={(e: {
                       target: { value: SetStateAction<string> };
                     }) => setComment(e.target.value)}
-                    className="mb-3"
+                    className="mb-3 text-[#ADAEBC]"
                   />
                   <Button
                     onClick={handleComment}
-                    className="bg-indigo-600 hover:bg-indigo-700"
-                    disabled={!comment.trim()}
+                    className="bg-[#4F46E5] hover:bg-indigo-700 cursor-pointer"
+                    // disabled={!comment.trim()}
                   >
                     Post Comment
                   </Button>
@@ -176,7 +178,7 @@ export default function ProposalDetail({ params }: { params: { id: string } }) {
               </div>
 
               {/* Comments List */}
-              <div className="space-y-4">
+              <div className="space-y-5.5">
                 {proposal.comments.map((comment) => (
                   <div key={comment.id} className="flex space-x-3">
                     <Avatar className="h-8 w-8">
@@ -211,6 +213,7 @@ export default function ProposalDetail({ params }: { params: { id: string } }) {
             <CardContent className="space-y-4">
               {/* Vote Progress */}
               <div className="space-y-2">
+                <Progress value={proposal.yesVotes} className="h-3" />
                 <div className="flex justify-between text-sm">
                   <span>
                     {proposal.yesVotes}% Yes (
@@ -221,16 +224,15 @@ export default function ProposalDetail({ params }: { params: { id: string } }) {
                     MGS)
                   </span>
                 </div>
-                <Progress value={proposal.yesVotes} className="h-3" />
               </div>
 
               {/* Vote Buttons */}
               <div className="space-y-2">
                 <Button
                   onClick={() => handleVote("yes")}
-                  className={`w-full ${
+                  className={`w-full cursor-pointer ${
                     userVote === "yes"
-                      ? "bg-green-700"
+                      ? "bg-[#10B981]"
                       : "bg-green-600 hover:bg-green-700"
                   }`}
                   disabled={userVote !== null}
@@ -241,7 +243,9 @@ export default function ProposalDetail({ params }: { params: { id: string } }) {
                 <Button
                   onClick={() => handleVote("no")}
                   variant="destructive"
-                  className={`w-full ${userVote === "no" ? "bg-red-700" : ""}`}
+                  className={`w-full cursor-pointer ${
+                    userVote === "no" ? "bg-[#EF4444]" : ""
+                  }`}
                   disabled={userVote !== null}
                 >
                   <X className="h-4 w-4 mr-2" />
@@ -278,7 +282,11 @@ export default function ProposalDetail({ params }: { params: { id: string } }) {
                         {voter.name}
                       </span>
                     </div>
-                    <span className="text-sm font-medium text-green-600">
+                    <span
+                      className={`text-sm font-medium ${
+                        voter.id == 1 ? "text-green-600" : "text-red-600"
+                      } `}
+                    >
                       {voter.amount}
                     </span>
                   </div>

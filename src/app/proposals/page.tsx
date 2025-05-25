@@ -73,49 +73,44 @@ export default function ProposalsPage() {
           <h1 className="text-3xl font-bold text-gray-900">Active Proposals</h1>
           <p className="text-gray-600 mt-1">23 proposals currently active</p>
         </div>
-        <Link href="/proposals/new">
-          <Button className="bg-indigo-600 cursor-pointer hover:bg-indigo-700">
-            <Plus className="h-4 w-4 mr-2" />
-            New Proposal
-          </Button>
-        </Link>
-      </div>
 
-      {/* Search and Filters */}
-      <div className="mb-6">
-        <div className="relative">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
-          <Input
-            placeholder="Search proposals..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-10 max-w-md"
-          />
+        <div className="flex items-center space-x-4">
+          {/* Search and Filters */}
+          <div className="">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+              <Input
+                placeholder="Search proposals..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="pl-10 max-w-md"
+              />
+            </div>
+          </div>
+
+          <Link href="/proposals/new">
+            <Button className="bg-indigo-600 cursor-pointer hover:bg-indigo-700">
+              <Plus className="h-4 w-4 mr-2" />
+              New Proposal
+            </Button>
+          </Link>
         </div>
       </div>
 
       {/* Tabs */}
-      <div className="border-b border-gray-200 mb-6">
-        <nav className="-mb-px flex space-x-8">
+      <div className=" rounded bg-white mb-6">
+        <nav className="-mb-px flex space-x-6">
           {tabs.map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`py-2 px-1 border-b-2 font-medium text-sm ${
+              className={`py-2 px-3 border-b-2 cursor-pointer rounded-md font-medium text-sm ${
                 activeTab === tab.id
-                  ? "border-indigo-500 text-indigo-600"
-                  : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                  ? "bg-[#E0E7FF] text-[#4F46E5]"
+                  : "border-transparent text-gray-500 hover:text-gray-700 hover:bg-[#E0E7FF]"
               }`}
             >
               {tab.label}
-              {tab.id === "all" && (
-                <Badge
-                  variant="secondary"
-                  className="ml-2 bg-indigo-100 text-indigo-800"
-                >
-                  {tab.count}
-                </Badge>
-              )}
             </button>
           ))}
         </nav>
@@ -124,7 +119,10 @@ export default function ProposalsPage() {
       {/* Proposals List */}
       <div className="space-y-6">
         {filteredProposals.map((proposal) => (
-          <Card key={proposal.id}>
+          <Card
+            key={proposal.id}
+            className="border-none shadow-sm hover:shadow-md transition-shadow duration-200"
+          >
             <CardContent className="p-6">
               <div className="flex justify-between items-start mb-4">
                 <div className="flex-1">
@@ -134,7 +132,7 @@ export default function ProposalsPage() {
                     </h3>
                     <Badge
                       variant="secondary"
-                      className="bg-green-100 text-green-800"
+                      className="bg-[#D1FAE5] text-[#059669]"
                     >
                       Active
                     </Badge>
@@ -162,19 +160,18 @@ export default function ProposalsPage() {
                 </div>
 
                 <div className="flex flex-col space-y-2 ml-6">
-                  <Button className="bg-green-600 cursor-pointer hover:bg-green-700">
-                    Vote Yes
-                  </Button>
-                  <Button variant="destructive" className="cursor-pointer">
-                    Vote No
-                  </Button>
-                  <Link href={`/proposals/${proposal.id}`}>
-                    <Button
-                      variant="outline"
-                      className="w-full cursor-pointer text-indigo-600"
-                    >
-                      View Details
+                  <div className="flex space-x-2">
+                    <Button className="bg-[#10B981] cursor-pointer hover:bg-green-700">
+                      Vote Yes
                     </Button>
+                    <Button className="bg-[#EF4444] cursor-pointer hover:bg-[#ef4a44] ">
+                      Vote No
+                    </Button>
+                  </div>
+                  <Link href={`/proposals/${proposal.id}`}>
+                    <button className="w-full text-right text-xs cursor-pointer text-indigo-600">
+                      View Details
+                    </button>
                   </Link>
                 </div>
               </div>
@@ -184,10 +181,10 @@ export default function ProposalsPage() {
       </div>
 
       {/* Pagination */}
-      <div className="flex justify-between items-center mt-8">
-        <p className="text-sm text-gray-700">Showing 1-3 of 23 proposals</p>
+      <div className="flex justify-between items-center mt-6">
+        <p className="text-sm text-[#6B7280]">Showing 1-3 of 23 proposals</p>
         <div className="flex space-x-2">
-          <Button variant="outline" disabled>
+          <Button variant="outline" className="cursor-not-allowed border">
             Previous
           </Button>
           <Button className="bg-indigo-600 hover:bg-indigo-700 cursor-pointer">

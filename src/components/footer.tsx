@@ -1,4 +1,8 @@
-import { Github, Twitter, MessageCircle } from "lucide-react";
+"use client";
+import discord from "../../public/discord.svg";
+import x from "../../public/x.svg";
+import github from "../../public/github.svg";
+import Image from "next/image";
 
 export function Footer() {
   return (
@@ -9,9 +13,13 @@ export function Footer() {
             © 2025 MGS DAO. All rights reserved.
           </p>
           <div className="flex space-x-4">
-            <MessageCircle className="h-5 w-5 text-gray-400 hover:text-gray-600 cursor-pointer" />
-            <Twitter className="h-5 w-5 text-gray-400 hover:text-gray-600 cursor-pointer" />
-            <Github className="h-5 w-5 text-gray-400 hover:text-gray-600 cursor-pointer" />
+            <Image
+              src={discord}
+              alt="icon"
+              className="h-5 w-5 cursor-pointer"
+            />
+            <Image src={x} alt="icon" className="h-5 w-5 cursor-pointer" />
+            <Image src={github} alt="icon" className="h-5 w-5 cursor-pointer" />
           </div>
         </div>
       </div>

@@ -244,11 +244,6 @@ export default function CreateProposal() {
                 className="hidden"
                 id="file-upload"
               />
-              <Label htmlFor="file-upload" className="cursor-pointer">
-                <Button variant="outline" type="button">
-                  Choose Files
-                </Button>
-              </Label>
             </div>
 
             {/* Attachment List */}
@@ -279,13 +274,13 @@ export default function CreateProposal() {
             <Button
               variant="outline"
               onClick={() => handleSubmit(true)}
-              className="px-8"
+              className="px-8 border cursor-pointer"
             >
               Save Draft
             </Button>
             <Button
               onClick={() => handleSubmit(false)}
-              className="bg-indigo-600 hover:bg-indigo-700 px-8"
+              className="bg-indigo-600 hover:bg-indigo-700 px-8 cursor-pointer"
             >
               Submit Proposal
             </Button>
